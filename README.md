@@ -59,5 +59,8 @@ ami-id will be imported using data.aws_ami
 
 ```bash
 docker build -t express-tf .
-docker run -it -v $(pwd):/app express-tf
+docker run -it \
+    -v $(pwd):/app \
+    -v ~/.ssh:/home/zshen/.ssh \
+    express-tf
 ```
