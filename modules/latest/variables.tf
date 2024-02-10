@@ -2,6 +2,9 @@ variable "database_name" {}
 variable "database_password" {}
 variable "database_user" {}
 
+variable "project_name" {
+  type = string
+}
 variable "region" {}
 variable "shared_credentials_file" {}
 variable "IsUbuntu" {
