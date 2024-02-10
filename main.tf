@@ -5,8 +5,9 @@ module "aws_wordpress" {
   // Password here will be used to create master db user.It should be chnaged later
   database_password       = "PassWord4-user"     //password for user database
   shared_credentials_file = "~/.aws/credentials" //Access key and Secret key file location
-  region                  = "us-east-1"          //sydney region
-  IsUbuntu                = true                 // true for ubuntu,false for linux 2  //boolean type
+  project_name            = "terraform-demo"
+  region                  = "us-east-1" //sydney region
+  IsUbuntu                = false       // true for ubuntu,false for linux 2  //boolean type
   // avaibility zone and their CIDR
   AZ1              = "us-east-1a"     // for EC2
   AZ2              = "us-east-1b"     //for RDS 

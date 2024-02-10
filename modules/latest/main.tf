@@ -167,7 +167,7 @@ resource "aws_db_instance" "wordpressdb" {
 }
 
 locals {
-  user_data = templatefile("${path.module}/${var.IsUbuntu ? "templates/userdata_ubuntu.tpl" : "templates/userdata.tpl"}", {
+  user_data = templatefile("${path.module}/${var.IsUbuntu ? "templates/userdata_ubuntu.tpl" : "templates/userdata_linux2.tpl"}", {
     db_username      = var.database_user
     db_user_password = var.database_password
     db_name          = var.database_name
