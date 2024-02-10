@@ -172,17 +172,14 @@ resource "aws_db_instance" "wordpressdb" {
   }
 }
 
-# change USERDATA varible value after grabbing RDS endpoint info
-data "template_file" "user_data" {
-  template = var.IsUbuntu ? file("${path.module}/userdata_ubuntu.tpl") : file("${path.module}/user_data.tpl")
-  vars = {
+locals {
+  user_data = templatefile("${path.module}/${var.IsUbuntu ? "userdata_ubuntu.tpl" : "userdata.tpl"}", {
     db_username      = var.database_user
     db_user_password = var.database_password
     db_name          = var.database_name
-    db_RDS           = aws_db_instance.wordpressdb.endpoint
-  }
+    db_RDS           = data.aws_db_instance.wordpressdb.endpoint
+  })
 }
-
 
 # Create EC2 ( only after RDS is provisioned)
 resource "aws_instance" "wordpressec2" {
@@ -190,7 +187,7 @@ resource "aws_instance" "wordpressec2" {
   instance_type          = var.instance_type
   subnet_id              = aws_subnet.prod-subnet-public-1.id
   vpc_security_group_ids = ["${aws_security_group.ec2_allow_rule.id}"]
-  user_data              = data.template_file.user_data.rendered
+  user_data              = local.user_data
   key_name               = aws_key_pair.mykey-pair.id
   tags = {
     Name = "Wordpress.web"
