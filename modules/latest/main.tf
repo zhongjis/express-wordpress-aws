@@ -11,7 +11,6 @@ provider "aws" {
   }
 }
 
-
 # Create VPC
 resource "aws_vpc" "prod-vpc" {
   cidr_block           = var.VPC_cidr
