@@ -1,26 +1,35 @@
 This terraform projects creates
- RDS databse with mysql 5.7 
- #EC2 instance with wordpress pre installed and configured 
- ----------------------------------------------------------------------
- AWS FREE TRIAL friendly
- ----------------------------------------------------------------------
- Change database entries ,regions and other variable in terraform.tfvars file
- And Database password in user.tfvars file
- -------------------------------------------------------------------------
-  This script is default for Ubuntu   
-  If you want to configure wordpress in AWS LINUX 2 then change IsUbuntu value to false in terraform.tfvars
+RDS databse with mysql 5.7
+#EC2 instance with wordpress pre installed and configured
 
-  Make sure you have configured aws CLI in your local machine
+---
 
-  user_data.tf is script for LINUX 2 and userdata_ubuntu.tpl is for Ubuntu
-  ----------------------------------------------------------------------------------------
-  ami-id will be imported using data.aws_ami 
-  --------------------------------------------------------------------------------
+AWS FREE TRIAL friendly
+
+---
+
+Change database entries ,regions and other variable in terraform.tfvars file
+And Database password in user.tfvars file
+
+---
+
+This script is default for Ubuntu  
+ If you want to configure wordpress in AWS LINUX 2 then change IsUbuntu value to false in terraform.tfvars
+
+Make sure you have configured aws CLI in your local machine
+
+user_data.tf is script for LINUX 2 and userdata_ubuntu.tpl is for Ubuntu
+
+---
+
+ami-id will be imported using data.aws_ami
+
+---
+
  <h3> Security: </h3>
 <p> EC2 will be launched in public subnet and RDS will be launched in private subnet </p>
 <p> Only EC2 with defined security group can access RDS and RDS wont have internet access </p>
-<p> Password for RDS will be used to create the resource, later it should be changed manually for security purposes. Terraform will ignore any changes in password 
-
+<p> Password for RDS will be used to create the resource, later it should be changed manually for security purposes. Terraform will ignore any changes in password
 
 <----------------------------------------------------------------------------------------------------------------------->
 
@@ -46,8 +55,9 @@ This terraform projects creates
 
  <p>Destroy the resources          <code> terraform destroy  </code></p>
 
- 
+# Dockerfile cheat sheet
 
-
-
-
+```bash
+docker build -t express-tf .
+docker run -it -v $(pwd):/app express-tf
+```
