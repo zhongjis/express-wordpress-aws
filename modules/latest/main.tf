@@ -42,7 +42,6 @@ resource "aws_subnet" "prod-subnet-private-2" {
   cidr_block              = var.subnet3_cidr
   map_public_ip_on_launch = "false" //it makes private subnet
   availability_zone       = var.AZ3
-
 }
 
 
@@ -50,7 +49,6 @@ resource "aws_subnet" "prod-subnet-private-2" {
 # Create IGW for internet connection 
 resource "aws_internet_gateway" "prod-igw" {
   vpc_id = aws_vpc.prod-vpc.id
-
 }
 
 # Creating Route table 
@@ -63,8 +61,6 @@ resource "aws_route_table" "prod-public-crt" {
     //CRT uses this IGW to reach internet
     gateway_id = aws_internet_gateway.prod-igw.id
   }
-
-
 }
 
 
@@ -145,7 +141,6 @@ resource "aws_security_group" "RDS_allow_rule" {
   tags = {
     Name = "allow ec2"
   }
-
 }
 
 # Create RDS Subnet group
@@ -211,7 +206,6 @@ resource "aws_key_pair" "mykey-pair" {
 # creating Elastic IP for EC2
 resource "aws_eip" "eip" {
   instance = aws_instance.wordpressec2.id
-
 }
 
 resource "null_resource" "Wordpress_Installation_Waiting" {
@@ -219,8 +213,8 @@ resource "null_resource" "Wordpress_Installation_Waiting" {
   triggers = {
     ec2_id       = aws_instance.wordpressec2.id,
     rds_endpoint = aws_db_instance.wordpressdb.endpoint
-
   }
+
   connection {
     type        = "ssh"
     user        = var.IsUbuntu ? "ubuntu" : "ec2-user"
@@ -231,11 +225,5 @@ resource "null_resource" "Wordpress_Installation_Waiting" {
 
   provisioner "remote-exec" {
     inline = ["sudo tail -f -n0 /var/log/cloud-init-output.log| grep -q 'WordPress Installed'"]
-
   }
 }
-
-
-
-
-
