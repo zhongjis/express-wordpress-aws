@@ -5,7 +5,7 @@ provider "aws" {
 
   default_tags {
     tags = {
-      Project   = "terraform-demo"
+      Project   = var.project_name
       ManagedBy = "Terraform"
     }
   }
