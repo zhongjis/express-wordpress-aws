@@ -1,7 +1,6 @@
 provider "aws" {
-
-  region                  = var.region
-  shared_credentials_files =[var.shared_credentials_file]
+  region                   = var.region
+  shared_credentials_files = [var.shared_credentials_file]
   profile                  = "default"
 }
 
@@ -12,8 +11,6 @@ resource "aws_vpc" "prod-vpc" {
   enable_dns_support   = "true" #gives you an internal domain name
   enable_dns_hostnames = "true" #gives you an internal host name
   instance_tenancy     = "default"
-
-
 }
 
 # Create Public Subnet for EC2
@@ -159,15 +156,15 @@ resource "aws_db_instance" "wordpressdb" {
   instance_class         = var.instance_class
   db_subnet_group_name   = aws_db_subnet_group.RDS_subnet_grp.id
   vpc_security_group_ids = ["${aws_security_group.RDS_allow_rule.id}"]
-  db_name                   = var.database_name
+  db_name                = var.database_name
   username               = var.database_user
   password               = var.database_password
   skip_final_snapshot    = true
 
- # make sure rds manual password chnages is ignored
+  # make sure rds manual password chnages is ignored
   lifecycle {
-     ignore_changes = [password]
-   }
+    ignore_changes = [password]
+  }
 }
 
 # change USERDATA varible value after grabbing RDS endpoint info
@@ -227,10 +224,10 @@ output "INFO" {
 }
 
 resource "null_resource" "Wordpress_Installation_Waiting" {
-   # trigger will create new null-resource if ec2 id or rds is chnaged
-   triggers={
-    ec2_id=aws_instance.wordpressec2.id,
-    rds_endpoint=aws_db_instance.wordpressdb.endpoint
+  # trigger will create new null-resource if ec2 id or rds is chnaged
+  triggers = {
+    ec2_id       = aws_instance.wordpressec2.id,
+    rds_endpoint = aws_db_instance.wordpressdb.endpoint
 
   }
   connection {

@@ -7,7 +7,6 @@ variable "shared_credentials_file" {}
 variable "IsUbuntu" {
   type    = bool
   default = true
-
 }
 variable "AZ1" {}
 variable "AZ2" {}
