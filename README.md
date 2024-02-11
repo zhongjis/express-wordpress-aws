@@ -2,15 +2,27 @@ This is a WIP project. Feel free to star now and check back later.
 
 My goal is creating a simple, minimal wordpress site using terraform.
 
+Simply put the workflow is (assume you have `tf` and `awscli` set up):
+
+- Set up / prepare the vars.
+- `terraform init`, then `terraform apply`
+- Done. You have your wordpress site running with minimal cost
+
 Target audience of this repo currently is only for small business (< 1k daily visits).
 
-# TODO
+# First Release (before 2024-03-01) - get things working first
 
-- [ ] wordpress is userdata is currently broken. I am working on fixing it.
-- [ ] will be using random terrform provider to generate random password for RDS
-- [ ] missing custom domain
+- [ ] wordpress userdata is currently broken. the site is not working. I am working on it.
+- [ ] use `random` terrform provider to generate random password for RDS
+
+# Later Releases
+
+- [ ] figure out how wordpress
+- [ ] missing custom domain setup
+- [ ] s3 storage for terraform state
 - [ ] consider adding autoscaling group for EC2
-- [ ] readme.md need a rework
+- [ ] add tech stack info to readme.md
+- [ ] more to readme.md
 
 ---
 
