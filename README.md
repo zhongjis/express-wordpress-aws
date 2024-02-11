@@ -1,3 +1,23 @@
+This is a WIP project. Feel free to check back later.
+
+My goal is creating a simple, minimal wordpress site using terraform.
+
+Target audience of this repo currently is only for small business (< 1k daily visits).
+
+# TODO
+
+- [ ] wordpress is userdata is currently broken. I am working on fixing it.
+- [ ] will be using random terrform provider to generate random password for RDS
+- [ ] missing custom domain
+- [ ] consider adding autoscaling group for EC2
+- [ ] readme.md need a rework
+
+---
+
+below are old docs
+
+---
+
 This terraform projects creates
 RDS databse with mysql 5.7
 #EC2 instance with wordpress pre installed and configured
@@ -54,14 +74,3 @@ ami-id will be imported using data.aws_ami
  <h3> everything is Automatic. This will provision all needed  aws resources and also build and start webserver using USERDATA </h3>
 
  <p>Destroy the resources          <code> terraform destroy  </code></p>
-
-# Dockerfile cheat sheet
-
-```bash
-docker build -t express-tf .
-docker run -it \
-    -v $(pwd):/app \
-    -v ~/.aws:/home/zshen/.aws \
-    -v ~/.ssh:/home/zshen/.ssh \
-    express-tf
-```
