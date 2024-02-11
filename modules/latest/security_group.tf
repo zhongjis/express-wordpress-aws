@@ -64,3 +64,25 @@ resource "aws_security_group" "RDS_allow_rule" {
     Name = "allow ec2"
   }
 }
+
+# EFS volume security group
+resource "aws_security_group" "efs_sg" {
+  name        = "efs security group"
+  description = "Allow EFS PORT"
+  vpc_id      = aws_vpc.prod-vpc.id
+  ingress {
+    description     = "EFS mount target"
+    from_port       = 2049
+    to_port         = 2049
+    protocol        = "tcp"
+    cidr_blocks     = ["0.0.0.0/0"]
+    security_groups = [aws_security_group.ec2_allow_rule.id]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
