@@ -43,8 +43,6 @@ resource "aws_subnet" "prod-subnet-private-2" {
   availability_zone       = var.AZ3
 }
 
-
-
 # Create IGW for internet connection 
 resource "aws_internet_gateway" "prod-igw" {
   vpc_id = aws_vpc.prod-vpc.id
@@ -62,20 +60,14 @@ resource "aws_route_table" "prod-public-crt" {
   }
 }
 
-
 # Associating route tabe to public subnet
 resource "aws_route_table_association" "prod-crta-public-subnet-1" {
   subnet_id      = aws_subnet.prod-subnet-public-1.id
   route_table_id = aws_route_table.prod-public-crt.id
 }
 
-
-
-//security group for EC2
-
+# Security group for EC2
 resource "aws_security_group" "ec2_allow_rule" {
-
-
   ingress {
     description = "HTTPS"
     from_port   = 443
@@ -119,7 +111,6 @@ resource "aws_security_group" "ec2_allow_rule" {
     Name = "allow ssh,http,https"
   }
 }
-
 
 # Security group for RDS
 resource "aws_security_group" "RDS_allow_rule" {
