@@ -23,4 +23,5 @@ sudo docker run --name wordpress-docker \
     -e WORDPRESS_DB_PASSWORD=${db_user_password} \
     -v ${efs_mount_directory}:${efs_mount_directory} \
     -p 80:80 -d wordpress:4.8-apache
+echo WordPress Installed
 
