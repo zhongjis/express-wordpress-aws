@@ -1,4 +1,4 @@
-This is a WIP project. Feel free to check back later.
+This is a WIP project. Feel free to star now and check back later.
 
 My goal is creating a simple, minimal wordpress site using terraform.
 
