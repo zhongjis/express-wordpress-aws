@@ -7,6 +7,12 @@ db_RDS=${db_RDS}
 efs_volume_id=${efs_volume_id}
 efs_mount_directory=${efs_mount_directory}
 
+if (test -f init.txt); then
+    echo "Instance already initialized"
+    date "+%Y-%m-%d %H:%M:%S" >> logfile.txt
+    exit 0
+fi
+
 sudo yum update -y
 sudo yum install docker -y
 wget https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)
@@ -18,10 +24,11 @@ sudo yum -y install amazon-efs-utils
 sudo mkdir -p ${efs_mount_directory}
 sudo mount -t efs -o tls ${efs_volume_id}:/ ${efs_mount_directory}
 sudo docker run --name wordpress-docker \
+    -restart=always \
     -e WORDPRESS_DB_USER=${db_username} \
     -e WORDPRESS_DB_HOST=${db_RDS} \
     -e WORDPRESS_DB_PASSWORD=${db_user_password} \
     -v ${efs_mount_directory}:${efs_mount_directory} \
-    -p 80:80 -d wordpress:4.8-apache
-echo WordPress Installed
+    -p 80:80 -d wordpress:6.4-apache
 
+date "+%Y-%m-%d %H:%M:%S" >> init.txt
