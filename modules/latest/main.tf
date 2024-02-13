@@ -24,7 +24,7 @@ resource "aws_db_instance" "wordpressdb" {
 
 locals {
   user_data = templatefile(
-    "${path.module}/${var.IsUbuntu ? "templates/userdata_ubuntu.tpl" : "templates/userdata_linux2.tpl"}",
+    "${path.module}/templates/userdata_linux2.tpl",
     {
       db_username         = var.database_user
       db_user_password    = var.database_password
@@ -37,7 +37,7 @@ locals {
 
 # Create EC2 ( only after RDS is provisioned)
 resource "aws_instance" "wordpressec2" {
-  ami                    = var.IsUbuntu ? data.aws_ami.ubuntu.id : data.aws_ami.linux2.id
+  ami                    = data.aws_ami.linux2.id
   instance_type          = var.instance_type
   subnet_id              = aws_subnet.prod-subnet-public-1.id
   vpc_security_group_ids = ["${aws_security_group.ec2_allow_rule.id}"]
@@ -45,10 +45,6 @@ resource "aws_instance" "wordpressec2" {
   key_name               = aws_key_pair.mykey-pair.id
   tags = {
     Name = "Wordpress.web"
-  }
-
-  root_block_device {
-    volume_size = var.root_volume_size # in GB 
   }
 
   # this will stop creating EC2 before RDS is provisioned
