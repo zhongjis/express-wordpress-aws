@@ -49,7 +49,6 @@ resource "aws_instance" "wordpressec2" {
 
   root_block_device {
     volume_size = var.root_volume_size # in GB 
-
   }
 
   # this will stop creating EC2 before RDS is provisioned
@@ -65,24 +64,4 @@ resource "aws_key_pair" "mykey-pair" {
 # creating Elastic IP for EC2
 resource "aws_eip" "eip" {
   instance = aws_instance.wordpressec2.id
-}
-
-resource "null_resource" "Wordpress_Installation_Waiting" {
-  # trigger will create new null-resource if ec2 id or rds is chnaged
-  triggers = {
-    ec2_id       = aws_instance.wordpressec2.id,
-    rds_endpoint = aws_db_instance.wordpressdb.endpoint
-  }
-
-  connection {
-    type        = "ssh"
-    user        = var.IsUbuntu ? "ubuntu" : "ec2-user"
-    private_key = file(var.PRIV_KEY_PATH)
-    host        = aws_eip.eip.public_ip
-  }
-
-
-  provisioner "remote-exec" {
-    inline = ["sudo tail -f -n0 /var/log/cloud-init-output.log| grep -q 'WordPress Installed'"]
-  }
 }
