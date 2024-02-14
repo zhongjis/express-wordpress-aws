@@ -70,16 +70,17 @@ resource "aws_db_subnet_group" "wp_db_subnet_group" {
 }
 
 resource "aws_db_instance" "wp_db" {
-  allocated_storage    = 10
-  storage_type         = "gp2"
-  engine               = "mysql"
-  engine_version       = "8.0"
-  instance_class       = "db.t2.micro"
-  db_name              = "wp_db"
-  username             = "wpuser"
-  password             = random_password.wp_db_user_password.result
-  db_subnet_group_name = aws_db_subnet_group.wp_db_subnet_group.name
-  skip_final_snapshot  = true
+  allocated_storage      = 10
+  storage_type           = "gp2"
+  engine                 = "mysql"
+  engine_version         = "8.0"
+  instance_class         = "db.t2.micro"
+  db_name                = "wp_db"
+  username               = "wpuser"
+  password               = random_password.wp_db_user_password.result
+  db_subnet_group_name   = aws_db_subnet_group.wp_db_subnet_group.name
+  vpc_security_group_ids = [aws_security_group.wp_rds_sg.id]
+  skip_final_snapshot    = true
 
   tags = {
     Name = "wp_db"
