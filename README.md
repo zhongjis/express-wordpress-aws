@@ -6,11 +6,16 @@ AWS FREE TRIAL friendly
 
 ---
 
+This repo is still a work-in-progress. Feel free to start and come back later if you do not see what you need here (yet).
+
+---
+
 **This terraform projects creates a WordPress site using AWS resources**
 
-It aims to provide seemless experience for small business to deploy their wordpress site using terraform.
+It aims to
 
-My goal is creating a simple, minimal wordpress site using terraform.
+- Creating a simple, minimal WordPress site with Terraform.
+- Provide **seamless** experience for business owners to create/grow their WordPress site capacity as needs grows.
 
 Simply put the workflow is (assume you have `tf` and `awscli` set up):
 
