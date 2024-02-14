@@ -1,16 +1,14 @@
 # express-wordpress-aws
 
-**This terraform projects creates a WordPress site using AWS resources**
-
-It aims to provide seemless experience for small business to deploy their wordpress site using terraform.
-
 ---
 
 AWS FREE TRIAL friendly
 
 ---
 
-#
+**This terraform projects creates a WordPress site using AWS resources**
+
+It aims to provide seemless experience for small business to deploy their wordpress site using terraform.
 
 My goal is creating a simple, minimal wordpress site using terraform.
 
