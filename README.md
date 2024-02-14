@@ -10,10 +10,10 @@ Simply put the workflow is (assume you have `tf` and `awscli` set up):
 
 Target audience of this repo currently is only for small business (< 1k daily visits).
 
-# First Release (before 2024-03-01) - get things working first
+# ~~First Release (before 2024-03-01) - get things working first~~
 
-- [ ] wordpress userdata is currently broken. the site is not working. I am working on it.
-- [ ] use `random` terrform provider to generate random password for RDS
+- [x] wordpress userdata is currently broken. the site is not working. I am working on it.
+- [x] use `random` terrform provider to generate random password for RDS
 
 # Later Releases
 
