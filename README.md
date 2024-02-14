@@ -1,38 +1,8 @@
-This is a WIP project. Feel free to star now and check back later.
+# express-wordpress-aws
 
-My goal is creating a simple, minimal wordpress site using terraform.
+**This terraform projects creates a WordPress site using AWS resources**
 
-Simply put the workflow is (assume you have `tf` and `awscli` set up):
-
-- Set up / prepare the vars.
-- `terraform init`, then `terraform apply`
-- Done. You have your wordpress site running with minimal cost
-
-Target audience of this repo currently is only for small business (< 1k daily visits).
-
-# ~~First Release (before 2024-03-01) - get things working first~~
-
-- [x] wordpress userdata is currently broken. the site is not working. I am working on it.
-- [x] use `random` terrform provider to generate random password for RDS
-
-# Later Releases
-
-- [ ] figure out how wordpress
-- [ ] missing custom domain setup
-- [ ] s3 storage for terraform state
-- [ ] consider adding autoscaling group for EC2
-- [ ] add tech stack info to readme.md
-- [ ] more to readme.md
-
----
-
-below are old docs
-
----
-
-This terraform projects creates
-RDS databse with mysql 5.7
-#EC2 instance with wordpress pre installed and configured
+It aims to provide seemless experience for small business to deploy their wordpress site using terraform.
 
 ---
 
@@ -40,49 +10,47 @@ AWS FREE TRIAL friendly
 
 ---
 
-Change database entries ,regions and other variable in terraform.tfvars file
-And Database password in user.tfvars file
+#
 
----
+My goal is creating a simple, minimal wordpress site using terraform.
 
-This script is default for Ubuntu  
- If you want to configure wordpress in AWS LINUX 2 then change IsUbuntu value to false in terraform.tfvars
+Simply put the workflow is (assume you have `tf` and `awscli` set up):
 
-Make sure you have configured aws CLI in your local machine
+- Set up / prepare the vars.
+- `terraform init`, then `terraform apply`
+- Done. You have your wordpress site running with minimal cost & effort
 
-user_data.tf is script for LINUX 2 and userdata_ubuntu.tpl is for Ubuntu
+Target audience of this repo currently is only for small business (< 1k daily visits).
 
----
+# First Release (before 2024-03-01) - minimal (completed)
 
-ami-id will be imported using data.aws_ami
+- [x] wordpress userdata is currently broken. the site is not working. I am working on it.
+- [x] use `random` terrform provider to generate random password for RDS
 
----
+# Second Release (before 2024-03-15) - minimal polished
 
- <h3> Security: </h3>
-<p> EC2 will be launched in public subnet and RDS will be launched in private subnet </p>
-<p> Only EC2 with defined security group can access RDS and RDS wont have internet access </p>
-<p> Password for RDS will be used to create the resource, later it should be changed manually for security purposes. Terraform will ignore any changes in password
+- [ ] add custom domain setup
+- [ ] add SSL setup (support https)
 
-<----------------------------------------------------------------------------------------------------------------------->
+# Later Releases
 
-<h2> Prerequisite </h2>
-<p> Before launching Terraform template, aws cli should be installed and configured with proper access key and secret key </p>
-<p> Terraform should be installed in your local machine </p>
-<p> Configure AWS CLI with <code> aws configure </code> if you havent configured already </p>
+- [ ] add bitmore setup
+- [ ] figure out how wordpress
+- [ ] s3 storage for terraform state
+- [ ] consider adding autoscaling group for EC2
+- [ ] add tech stack info to readme.md
+- [ ] more to readme.md
 
-<------------------------------------------------------------------------------------------------------------------------>
+# Tech Stack
 
-<h2> STEPS: </h2>
+- EC2: AWS Linux 2
+- RDS: MySQL 8.0
+- EFS: for wordpress files
 
- <p>Clone this repo using command <code>  git clone https://github.com/devbhusal/terraform-ec2-RDS-wordpress.git</code></p>
- <p> Go to project folder         <code>  cd terraform-ec2-RDS-wordpress </code></p>
- <p>Initialize terraform          <code>  terraform init</code></p>
- <p>Change database and aws setting in terraform.tfvars file </p>
- <p>Generate Key pair using        <code> ssh-keygen -f mykey-pair  </code></p>
- <p>View Plan using                <code> terraform plan   </code></p>
- <p>Apply the plan using           <code> terraform apply  </code></p>
- 
- <p> After successfull provisioning of AWS Resources,Using remote-exec and private key, EC2 instance will be connected via  SSH. Tail command will used to check prgress of Wordpress Installation. Once Installation is done ,You will be provided with Public Ip address of WebServer.</p>
- <h3> everything is Automatic. This will provision all needed  aws resources and also build and start webserver using USERDATA </h3>
+# How to deploy
 
- <p>Destroy the resources          <code> terraform destroy  </code></p>
+1. assume you already have access token setup (easiest way is `aws configure`)
+2. `terraform init` under the module you would like to deploy
+3. `terraform apply`
+
+This repo was originally forked from https://github.com/devbhusal/terraform-ec2-RDS-wordpress
