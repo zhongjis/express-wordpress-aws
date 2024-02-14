@@ -6,7 +6,7 @@ AWS FREE TRIAL friendly
 
 ---
 
-This repo is still a work-in-progress. Feel free to start and come back later if you do not see what you need here (yet).
+This repo is still a work-in-progress. Feel free to star and come back later if you do not see what you need here (yet).
 
 ---
 
