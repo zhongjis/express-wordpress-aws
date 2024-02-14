@@ -17,7 +17,7 @@ sudo yum -y install amazon-efs-utils
 sudo mkdir -p /mnt/efs
 sudo mount -t efs -o tls ${efs_volume_id}:/ /mnt/efs
 sudo docker run --name wordpress-docker \
-    -restart=always \
+    --restart=always \
     -e WORDPRESS_DB_HOST=${db_endpoint} \
     -e WORDPRESS_DB_NAME=${db_name} \
     -e WORDPRESS_DB_USER=${db_user} \

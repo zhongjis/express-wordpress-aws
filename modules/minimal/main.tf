@@ -17,11 +17,12 @@ locals {
 }
 
 resource "aws_instance" "wp_instance" {
-  ami           = data.aws_ami.linux2.id
-  instance_type = "t2.micro"
-  key_name      = aws_key_pair.wp_ec2_pub_key.id
-  subnet_id     = aws_subnet.wp_public_subnet.id
-  user_data     = local.user_data
+  ami                    = data.aws_ami.linux2.id
+  instance_type          = "t2.micro"
+  key_name               = aws_key_pair.wp_ec2_pub_key.id
+  subnet_id              = aws_subnet.wp_public_subnet.id
+  vpc_security_group_ids = [aws_security_group.wp_ec2_sg.id]
+  user_data              = local.user_data
 
   lifecycle {
     create_before_destroy = true
@@ -30,6 +31,8 @@ resource "aws_instance" "wp_instance" {
   tags = {
     Name = "wp_instance"
   }
+
+  depends_on = [aws_db_instance.wp_db]
 }
 
 // EFS setup
@@ -67,6 +70,7 @@ resource "aws_db_subnet_group" "wp_db_subnet_group" {
 }
 
 resource "aws_db_instance" "wp_db" {
+  identifier           = "wpdb"
   allocated_storage    = 10
   storage_type         = "gp2"
   engine               = "mysql"
