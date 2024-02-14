@@ -70,11 +70,10 @@ resource "aws_db_subnet_group" "wp_db_subnet_group" {
 }
 
 resource "aws_db_instance" "wp_db" {
-  identifier           = "wpdb"
   allocated_storage    = 10
   storage_type         = "gp2"
   engine               = "mysql"
-  engine_version       = "8.0"
+  engine_version       = "5.7"
   instance_class       = "db.t2.micro"
   db_name              = "wp_db"
   username             = "wpuser"
