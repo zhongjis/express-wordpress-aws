@@ -73,7 +73,7 @@ resource "aws_db_instance" "wp_db" {
   allocated_storage    = 10
   storage_type         = "gp2"
   engine               = "mysql"
-  engine_version       = "5.7"
+  engine_version       = "8.0"
   instance_class       = "db.t2.micro"
   db_name              = "wp_db"
   username             = "wpuser"
