@@ -31,7 +31,8 @@ variable "vpc_cidr_block" {
 }
 
 variable "subnet_cidr_blocks" {
-  type = list(string)
+  description = "Cidr blocks for subnets, need 3 minimal"
+  type        = list(string)
 }
 
 variable "ec2_public_key_path" {

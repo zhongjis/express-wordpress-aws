@@ -1,11 +1,11 @@
 provider "aws" {
-  region                   = "us-east-1"
-  shared_credentials_files = ["~/.aws/credentials"]
+  region                   = var.region
+  shared_credentials_files = [var.aws_cli_credential]
   profile                  = "default"
 
   default_tags {
     tags = {
-      Project   = "express-prototype"
+      Project   = var.project_name
       ManagedBy = "Terraform"
     }
   }
