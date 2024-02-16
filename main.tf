@@ -1,22 +1,13 @@
 module "aws_wordpress" {
-  source        = "./modules/latest"
-  database_name = "wordpress_db"   // database name
-  database_user = "wordpress_user" //database username
-  // Password here will be used to create master db user.It should be chnaged later
-  database_password       = "PassWord4-user"     //password for user database
-  shared_credentials_file = "~/.aws/credentials" //Access key and Secret key file location
-  project_name            = "terraform-demo"
-  region                  = "us-east-1" //sydney region
-  // avaibility zone and their CIDR
-  AZ1             = "us-east-1a"     // for EC2
-  AZ2             = "us-east-1b"     //for RDS 
-  AZ3             = "us-east-1c"     //for RDS
-  VPC_cidr        = "10.0.0.0/16"    // VPC CIDR
-  subnet1_cidr    = "10.0.1.0/24"    // Public Subnet for EC2
-  subnet2_cidr    = "10.0.2.0/24"    //Private Subnet for RDS
-  subnet3_cidr    = "10.0.3.0/24"    //Private subnet for RDS
-  PUBLIC_KEY_PATH = "~/.ssh/aws.pub" // key name for ec2, make sure it is created before terrafomr apply
-  PRIV_KEY_PATH   = "~/.ssh/aws"
-  instance_type   = "t2.micro"    //type of instance
-  instance_class  = "db.t2.micro" //type of RDS Instance
+  source = "./modules/minimal"
+
+  project_name = "terraform-demo"
+
+  region             = "us-east-1"
+  availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
+  vpc_cidr_block     = "10.0.0.0/16"
+  subnet_cidr_blocks = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+
+  ec2_public_key_path  = "~/.ssh/aws.pub" // key name for ec2, make sure it is created before terrafomr apply
+  ec2_private_key_path = "~/.ssh/aws"
 }
