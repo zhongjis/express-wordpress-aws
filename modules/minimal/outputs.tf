@@ -11,6 +11,6 @@ output "wp_db_user_password" {
   sensitive = true
 }
 
-output "wp_ec2_instance_ip" {
-  value = aws_instance.wp_instance.public_ip
+output "wp_ec2_instance_dns" {
+  value = aws_instance.wp_instance.public_dns
 }
